@@ -56,3 +56,184 @@ scatter_plot <- ggplot(data = penguins, aes(x = flipper_length_mm,
 scatter_plot
 
 ```
+
+```{r}
+#installing chatrr
+    #install.packages("ellmer")
+    #install.packages("chattr")
+
+usethis::edit_r_environ()
+
+usethis::edit_r_profile()
+
+# Option B: For OpenAI ChatGPT
+options(.chattr_chat = ellmer::chat_openai())
+
+```
+
+```{r}
+
+#Show me how to load the built-in iris dataset and use ggplot2 to build a scatter plot of Sepal.Length versus Sepal.Width colored by Species.
+data(iris)
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Sepal Length vs Sepal Width",
+       x = "Sepal Length",
+       y = "Sepal Width") +
+  theme_minimal()
+
+```
+
+```{r}
+# Simple Example: Checking Sea Surface Temperature (SST)
+sst <- 30.2
+
+if (sst > 29.5) {
+  print("Warning: Marine heatwave threshold exceeded!")
+} else {
+  print("SST remains within baseline parameters.")
+}
+
+#if else 
+# Load tidyverse (if not already loaded)
+library(tidyverse)
+
+# Sample coral data
+coral_monitoring <- tibble(
+  site = c("Site_A", "Site_B", "Site_C"),
+  depth_m = c(12, 35, 8)
+)
+
+# Classify depth using if_else
+coral_monitoring <- coral_monitoring %>% 
+  mutate(zone = if_else(depth_m > 30, "Deep Reef", "Shallow Reef"))
+
+# mutate()
+#%>%
+
+#case when **tildes
+
+coral_monitoring <- coral_monitoring %>% 
+  mutate(reef_category = case_when(
+    depth_m < 10  ~ "Lagoon / Flats",
+    depth_m <= 30 ~ "Crest / Slope",
+    depth_m > 30  ~ "Mesophotic / Deep",
+    TRUE          ~ "Unclassified" # Catch-all remainder
+ ))
+
+```
+
+Using the chattr app or inline copilot, your task here is to write an R script that initialises a tibble named marine_stations containing a column for salinity with values 35, 28, 32, and 12. Use the pipe operator (%>%) and mutate() combined with case_when() to create a new column named environment_type. Classify values below 15 as "Estuarine", values between 15 and 30 as "Brackish", and values above 30 as "Marine". Run your script and verify the table structure.
+```{r}
+
+#Marine_stations as a tibble containing a column for salinity with values 35, 28, 32, and 12.
+
+marine_stations <- tibble(
+  salinity = c(35, 28, 32, 12)
+)
+
+#Use %>% and mutate(), along with case_when to create a new column named environmental_type.
+
+envrionment_type <- marine_stations %>%
+  mutate(environment_type = case_when(
+    #classify "Estuarine " below 15, "Brackish" between 15 and 30, and "Marine" above 30.
+    salinity < 15 ~ "Estuarine",
+    salinity >= 15 & salinity <= 30 ~ "Brackish",
+    salinity > 30 ~ "Marine"
+  ))
+
+
+```
+
+
+```{r}
+##BASE R 
+# Classic loop anatomy
+for (year in 2020:2024) {
+  print(paste("Processing climate data for year:", year))
+}
+
+# Loop across index sequences
+transect_lengths <- c(50, 100, 25, 75)
+
+for (i in seq_along(transect_lengths)) {
+  print(paste("Transect number", i, "measures", transect_lengths[i], "metres."))
+}
+
+##Tidyverse
+
+#Using a standard for loop 
+site_areas <- c(144, 400, 625)
+results <- numeric(length(site_areas)) # Must build an empty container first
+
+for(i in seq_along(site_areas)) {
+  results[i] <- sqrt(site_areas[i])}
+  
+#Using the purr equivalent 
+library(purrr)
+mapped_results <- map_dbl(site_areas, sqrt) # Map directly, define expected output type explicitly
+
+# Iterate a summary function over split lists of data
+iris %>% 
+  split(.$Species) %>% 
+  map(~summary(.x))
+
+```
+
+
+```{r}
+#I have a list of three vectors containing fish count data. Write a for-loop to calculate the mean of each, and then show me the exact parallel way to do it using purrr's map_dbl function.
+
+fish_counts <- list(c(10, 15, 20), c(5, 8, 12), c(25, 30, 35))
+
+# For-loop approach
+means <- numeric(length(fish_counts))
+for (i in seq_along(fish_counts)) 
+  {
+  means[i] <- mean(fish_counts[[i]])
+  }
+
+# Parallel approach with purrr
+library(purrr)
+mapped_means <- map_dbl(fish_counts, mean)
+
+```
+
+##FUNCTION CONSTRUCTION BLUEPRINT
+```{r}
+
+# Function Definition
+calculate_coral_mortality <- function(initial_count, surviving_count) 
+  {
+  # Logic safety switch using our conditional tools!
+  if (initial_count <= 0) 
+    {
+    stop("Initial count must be greater than zero.")
+    }
+  mortality_rate <- (initial_count - surviving_count) / initial_count
+  return(mortality_rate)
+  }
+
+# Utilizing your custom function
+calculate_coral_mortality(initial_count = 120, surviving_count = 84)
+{
+  if (initial_count <=0) {stop("Initial coun must be greater than zero.")}
+
+mortality_rate <- (initial_count - surviving_count) / initial_count
+return (mortalitry_rate) }
+
+
+```
+
+
+Build a custom function named convert_temp_c_to_f that accepts a single argument representing temperature in Celsius. The function should perform the math conversion: F = (C * 9/5) + 32. Include a conditional safety check using an if statement that halts execution via stop() if the entered value is below absolute zero (-273.15 degrees Celsius). Test your function with both a valid temperature and an invalid value to ensure the error handling behaves as expected.
+```{r}
+#build a function names convert_temp_c_to_f that accepts a single argument (temperature in Celsius) and performs F = (C* 9/5)+32. 
+
+
+
+  
+
+```
+
+
