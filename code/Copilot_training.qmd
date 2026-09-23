@@ -1,0 +1,20 @@
+---
+title: "palmpeng"
+format: html
+editor: visual
+---
+
+```{r}
+# Load tidyverse and palmerpenguins libraries
+
+library (tidyverse)
+library(palmerpenguins)
+
+# Create a ggplot scatter plot using the penguins dataset. 
+# Plot bill_length_mm on the x-axis and bill_depth_mm on the y-axis.
+# Color points by species and use geom_point with size 3.
+# Add a minimal theme and clean labels.
+
+
+
+```
