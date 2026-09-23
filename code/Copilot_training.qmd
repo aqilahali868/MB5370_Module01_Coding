@@ -6,15 +6,53 @@ editor: visual
 
 ```{r}
 # Load tidyverse and palmerpenguins libraries
-
-library (tidyverse)
+library(tidyverse)
 library(palmerpenguins)
+  
 
 # Create a ggplot scatter plot using the penguins dataset. 
 # Plot bill_length_mm on the x-axis and bill_depth_mm on the y-axis.
 # Color points by species and use geom_point with size 3.
 # Add a minimal theme and clean labels.
+plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(size = 3) +
+  labs(title = "Bill Length vs Bill Depth of Penguins",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)") +
+  theme_minimal()
 
+plot
 
+```
+
+```{r}
+
+#create boxplot comparing flipper_length_mm across different species, faceted by island, using custom color palettes.
+boxplot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+  geom_boxplot() +
+  facet_wrap(~ island) +
+  labs(title = "Flipper Length by Species and Island",
+       x = "Species",
+       y = "Flipper Length (mm)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Adelie" = "blue", "Chinstrap" = "red", "Gentoo" = "green"))
+
+boxplot
+
+```
+
+```{r}
+#build a scatter plot mapping body_mass_g against flipper_length_mm, adding a linear regression trend line (geom_smooth) for each species.
+scatter_plot <- ggplot(data = penguins, aes(x = flipper_length_mm, 
+                                            y = body_mass_g, 
+                                            color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Body Mass vs Flipper Length of Penguins",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)") +
+  theme_minimal()
+
+scatter_plot
 
 ```
